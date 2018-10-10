@@ -5,6 +5,6 @@ const router = express.Router()
 
 /* GET home page. */
 router.get('/files/', fileController.root)
-router.get('/files/:path', fileController.byPath);
+router.get('/files/*', fileController.byPath);
 
 module.exports = router;

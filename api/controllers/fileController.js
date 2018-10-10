@@ -23,7 +23,7 @@ function getFolderContent (dirPath, callback) {
       return {
         name: subFile,
         type: type,
-        childrens: null
+        childrens: type === 'dir' ? null : undefined  // No childrens for files
       }
     })
 
@@ -43,7 +43,7 @@ const fileController = {
   },
 
   byPath (req, res) {
-    const inputPath = req.params.path
+    const inputPath = req.params['0']
     const finalPath = path.join(filesPath, inputPath)
 
     if (!fs.existsSync(finalPath) || !finalPath.startsWith(filesPath)) {
