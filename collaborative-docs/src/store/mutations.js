@@ -6,6 +6,7 @@ import helper from '../helper'
 const API_URL = 'http://localhost:3000/files'
 
 function updateFolderRecursive (state, paths) {
+  console.log('Updating', paths)
   if (!paths.length)
     return null
 
@@ -17,13 +18,13 @@ function updateFolderRecursive (state, paths) {
   paths.shift()
 
   // If the folder is already fetched, don't update it
-  if (folder.childrens) { return updateFolderRecursive(state, paths) }
+  if (folder.children) { return updateFolderRecursive(state, paths) }
 
   const url = urljoin(API_URL, path_)
 
-  axios.get(url).then(response => {
-    folder.childrens = response.data
-    return updateFolderRecursive(state, paths)
+  return axios.get(url).then(response => {
+    folder.children = response.data
+    updateFolderRecursive(state, paths)
   }).catch(error => {
     console.error(error)
   })

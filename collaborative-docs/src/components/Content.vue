@@ -27,25 +27,21 @@
         reversed: false,           // True if the order is reversed
       }
     },
+
     methods: {
       selectProperty (property) {
-        console.log('Called with property =', property)
         if (this.selectedProperty === property)
           this.reversed = !this.reversed
         else
           this.selectedProperty = property
-
-        console.log('Now this.selectedProperty =', this.selectedProperty, ' and reversed =', this.reversed)
       },
     },
+
     computed: {
       sortedElements: function () {
         const order = this.reversed ? 'desc' : 'asc'
-        console.log('COMPUTED CALLED, ORDER IS', order)
-        console.log(JSON.stringify(this.currentFolder.childrens))
-
-        return _.orderBy(this.currentFolder.childrens,
-                         children => children[this.selectedProperty].toLowerCase(),
+        return _.orderBy(this.currentFolder.children,
+                         child => child[this.selectedProperty].toLowerCase(),
                          order)
       },
     },

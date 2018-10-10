@@ -23,7 +23,7 @@ function getFolderContent (dirPath, callback) {
       return {
         name: subFile,
         type: type,
-        childrens: type === 'dir' ? null : undefined  // No childrens for files
+        children: type === 'dir' ? null : undefined  // No children for files
       }
     })
 

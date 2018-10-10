@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    folders: {name: 'Documents', type: 'dir', childrens: null}
+    folders: {name: 'Documents', type: 'dir', children: null}
   },
 
   mutations: mutations,

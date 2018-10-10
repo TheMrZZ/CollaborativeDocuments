@@ -33,11 +33,11 @@ export default {
       if (subFolderName === '')
         continue
 
-      let childrens = subFolder.childrens
-      if (childrens === null) {
+      let children = subFolder.children
+      if (children === null) {
         return null
       }
-      subFolder = childrens.filter(child => child.name === subFolderName)[0]
+      subFolder = children.filter(child => child.name === subFolderName)[0]
     }
 
     return subFolder

@@ -3,12 +3,12 @@
     <span class="sidebar-folder" :class="{ selected }">
       <span class="right-chevron" @click.prevent="toggleSelected"></span>
       <span class="folder-icon"></span>
-      <a :href="'#' + folderPath"> {{ subFolder.name }} - {{ folderPath }} </a>
+      <a :href="'#' + folderPath">{{ subFolder.name }}</a>
     </span>
 
-    <ul v-if="subFolder.childrens && subFolder.childrens.length && selected">
-      <li v-for="children in subFolder.childrens">
-        <SideTree :sub-folder="children" :folder-path="folderPath + '/' + children.name"></SideTree>
+    <ul v-if="subFolder.children && subFolder.children.length && selected">
+      <li v-for="child in childrenFolders">
+        <SideTree :sub-folder="child" :folder-path="folderPath + '/' + child.name"></SideTree>
       </li>
     </ul>
 
@@ -30,9 +30,15 @@
       }
     },
 
+    computed: {
+      childrenFolders: function () {
+        return this.subFolder.children.filter((child) => child.type === 'dir')
+      },
+    },
+
     methods: {
       toggleSelected: function () {
-        this.$store.dispatch('updateFolders', this.folderPath).then(() => {
+        this.$store.dispatch('updateFolders', this.$route.path).then(() => {
           this.selected = !this.selected
         })
       },
