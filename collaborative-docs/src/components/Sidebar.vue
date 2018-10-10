@@ -1,79 +1,26 @@
 <template>
   <nav id="sidebar">
     <ul>
-      <li>
-            <span class="sidebar-folder selected">
-                <span class="right-chevron"></span>
-                <span class="folder-icon"></span>
-                <a href="">Documents</a>
-            </span>
-        <ul>
-          <li>
-                    <span class="sidebar-folder">
-                        <span class="right-chevron"></span>
-                        <a href="">Folder</a>
-                    </span>
-          </li>
-          <li>
-                    <span class="sidebar-folder selected">
-                        <span class="right-chevron"></span>
-                        <a href="">Expanded Folder</a>
-                    </span>
-            <ul>
-              <li>
-                            <span class="sidebar-folder">
-                                <span class="right-chevron"></span>
-                                <a href="">Folder</a>
-                            </span>
-              </li>
-            </ul>
-          </li>
-          <li>
-                    <span class="sidebar-folder">
-                        <span class="right-chevron"></span>
-                        <a href="">Folder</a>
-                    </span>
-          </li>
-          <li>
-                    <span class="sidebar-folder">
-                        <span class="right-chevron"></span>
-                        <a href="">Folder</a>
-                    </span>
-          </li>
-        </ul>
-      </li>
+      <SideTree :sub-folder="folders" :folder-path="''"></SideTree>
     </ul>
   </nav>
 </template>
 
 <script>
+  import SideTree from './SideTree'
+  import foldersMixin from '../mixins/foldersMixin'
+
   export default {
     name: 'Sidebar',
+    components: { SideTree },
+    mixins: [foldersMixin],
   }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
   @import "../stylesheets/_media";
   @import "../stylesheets/_vars";
   @import "../stylesheets/_icons";
-
-  .sidebar-folder.selected > .right-chevron {
-    transform: rotate(90deg);
-  }
-
-  .sidebar-folder {
-    transition: 0s color;
-
-    > a:before {
-      .display-folder(@folder-icon-size, @folder-icon-size);
-      margin-right: 7px;
-    }
-
-    &.selected > a:before {
-      .display-folder-open(@folder-icon-size, @folder-icon-size);
-      margin-right: 7px;
-    }
-  }
 
   #sidebar {
     grid-area: sidebar;

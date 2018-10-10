@@ -9,11 +9,6 @@ export default {
       return helper.getSubFolder(state.folders, this.$route.path)
     },
 
-    currentFolderChildrens: function (state) {
-      let childrens = this.currentFolder.childrens.copy()
-      childrens.sort(helper.compareFoldersByName)
-    },
-
     currentPath () {
       const initialFolder = { name: 'Documents', path: '', url: '/#/' }
 

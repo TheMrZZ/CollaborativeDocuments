@@ -4,8 +4,11 @@
 
     <div>Current folder: {{currentFolder.name}}</div>
 
+    <p @click="selectProperty('name')">Name</p>
+    <p @click="selectProperty('type')">Type</p>
+
     <ul style="margin-top: 30px">
-        <li v-for="elements in currentFolder.childrens">{{elements.name}}</li>
+      <li v-for="elements in sortedElements">{{elements.name}}</li>
     </ul>
 
   </main>
@@ -13,10 +16,39 @@
 
 <script>
   import foldersMixin from '../mixins/foldersMixin'
+  import _ from 'lodash'
 
   export default {
     name: 'Content',
     mixins: [foldersMixin],
+    data () {
+      return {
+        selectedProperty: 'name', // The property to sort the items by
+        reversed: false,           // True if the order is reversed
+      }
+    },
+    methods: {
+      selectProperty (property) {
+        console.log('Called with property =', property)
+        if (this.selectedProperty === property)
+          this.reversed = !this.reversed
+        else
+          this.selectedProperty = property
+
+        console.log('Now this.selectedProperty =', this.selectedProperty, ' and reversed =', this.reversed)
+      },
+    },
+    computed: {
+      sortedElements: function () {
+        const order = this.reversed ? 'desc' : 'asc'
+        console.log('COMPUTED CALLED, ORDER IS', order)
+        console.log(JSON.stringify(this.currentFolder.childrens))
+
+        return _.orderBy(this.currentFolder.childrens,
+                         children => children[this.selectedProperty].toLowerCase(),
+                         order)
+      },
+    },
   }
 </script>
 

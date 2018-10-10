@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import mutations from './mutations'
+import actions from './actions'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,9 @@ const store = new Vuex.Store({
     folders: {name: 'Documents', type: 'dir', childrens: null}
   },
 
-  mutations: mutations
+  mutations: mutations,
+
+  actions: actions,
 })
 
 export default store
