@@ -1,0 +1,38 @@
+@import '_vars';
+
+@images-folder: '../images/';
+
+.display-icon(@height, @width, @url) {
+  mask: url('@{images-folder}@{url}') no-repeat;
+  mask-size: @width @height;
+
+  background-color: @font-color;
+
+  height: @height;
+  width: @width;
+
+  position: center;
+
+  display: inline-block;
+  content: "";
+}
+
+// Creates a chevron of the given height & width. By default is turned to the right
+.display-chevron(@height, @width) {
+  .display-icon(@height, @width, 'right-chevron.svg');
+}
+
+.right-chevron {
+  .display-chevron(@chevron-icon-size, @chevron-icon-size);
+
+  transform: rotate(0deg);
+  transition-duration: 0.1s;
+}
+
+.display-folder(@height, @width) {
+  .display-icon(@height, @width, 'folder.svg');
+}
+
+.display-folder-open(@height, @width) {
+  .display-icon(@height, @width, 'folder-open.svg');
+}
