@@ -26,6 +26,7 @@ export default {
    * @returns the wanted folder
    */
   getSubFolder (folders, path_) {
+    path_ = decodeURI(path_);
     let subFolder = folders
     let names = path_.split('/')
 

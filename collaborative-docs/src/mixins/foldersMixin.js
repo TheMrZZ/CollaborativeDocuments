@@ -3,20 +3,26 @@ import helper from '../helper'
 
 export default {
   computed: mapState({
+    formatedPath () {
+      return decodeURI(this.$route.path);
+    },
+
     folders: state => state.folders,
 
     currentFolder: function (state) {
-      return helper.getSubFolder(state.folders, this.$route.path)
+      console.log('FORMATEDPATH:', this.formatedPath)
+      return helper.getSubFolder(state.folders, this.formatedPath)
     },
 
     currentPath () {
       const initialFolder = { name: 'Documents', path: '', url: '/#/' }
 
-      if (this.$route.path === '/') {
+      if (this.formatedPath === '/') {
         return [initialFolder]
       }
 
-      let fullPath = this.$route.path.split('/')
+      console.log('FORMATEDPATH:', this.formatedPath)
+      let fullPath = this.formatedPath.split('/')
       let currentPath = '/#/'
 
       fullPath = fullPath.

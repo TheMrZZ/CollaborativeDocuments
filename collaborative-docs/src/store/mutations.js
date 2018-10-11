@@ -22,9 +22,9 @@ function updateFolderRecursive (state, paths) {
 
   const url = urljoin(API_URL, path_)
 
-  return axios.get(url).then(response => {
+  axios.get(url).then(response => {
     folder.children = response.data
-    updateFolderRecursive(state, paths)
+    return updateFolderRecursive(state, paths)
   }).catch(error => {
     console.error(error)
   })

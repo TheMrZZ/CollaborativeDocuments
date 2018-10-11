@@ -2,7 +2,7 @@
   <div id="app">
     <Header></Header>
     <Sidebar></Sidebar>
-    <Content></Content>
+    <!--<Content></Content>-->
   </div>
 </template>
 
@@ -10,14 +10,16 @@
   import Content from './Content'
   import Sidebar from './Sidebar'
   import Header from './Header'
+  import foldersMixin from '../mixins/foldersMixin'
 
   export default {
     name: 'Main',
     components: { Header, Sidebar, Content },
+    mixins: [foldersMixin],
 
     methods: {
       updateFolders: function () {
-        this.$store.commit('updateFolders', this.$route.path)
+        this.$store.commit('updateFolders', this.formatedPath)
       },
     },
 

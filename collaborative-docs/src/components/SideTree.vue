@@ -26,7 +26,7 @@
     data () {
       return {
         // The element is selected by default if it is in the current path
-        selected: this.inPath(),
+        selected: false,
       }
     },
 
@@ -37,21 +37,26 @@
     },
 
     methods: {
-      toggleSelected: function () {
-        this.$store.dispatch('updateFolders', this.$route.path).then(() => {
+      toggleSelected () {
+        this.$store.dispatch('updateFolders', this.folderPath).then(() => {
           this.selected = !this.selected
         })
       },
 
-      inPath: function () {
-        return this.$route.path.startsWith(this.folderPath)
+      inPath () {
+        console.log('THIS:', this)
+        return this.formatedPath.startsWith(this.folderPath)
       },
 
       // If the current folder is not selected but is now in the path, select it
-      selectIfInPath: function () {
+      selectIfInPath () {
         if (this.inPath())
           this.selected = true
       },
+    },
+
+    mounted () {
+      this.selectIfInPath();
     },
 
     watch: {
