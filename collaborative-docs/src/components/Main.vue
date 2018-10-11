@@ -2,7 +2,7 @@
   <div id="app">
     <Header></Header>
     <Sidebar></Sidebar>
-    <!--<Content></Content>-->
+    <Content></Content>
   </div>
 </template>
 
